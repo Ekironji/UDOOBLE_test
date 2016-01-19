@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "C:\\Users\\Luca\\AndroidStudioProject\\UDOOBLE\\baseBLESensorTAG\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\fragment_device.xml",
+        "source": "C:\\Users\\Luca\\AndroidStudioProject\\UDOOBLE\\baseBLESensorTAG\\build\\intermediates\\bundles\\debug\\res\\layout\\fragment_device.xml"
+    },
+    {
+        "merged": "C:\\Users\\Luca\\AndroidStudioProject\\UDOOBLE\\baseBLESensorTAG\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_device.xml",
+        "source": "C:\\Users\\Luca\\AndroidStudioProject\\UDOOBLE\\baseBLESensorTAG\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_device.xml"
+    },
+    {
+        "merged": "C:\\Users\\Luca\\AndroidStudioProject\\UDOOBLE\\baseBLESensorTAG\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\element_device.xml",
+        "source": "C:\\Users\\Luca\\AndroidStudioProject\\UDOOBLE\\baseBLESensorTAG\\build\\intermediates\\bundles\\debug\\res\\layout\\element_device.xml"
+    },
+    {
+        "merged": "C:\\Users\\Luca\\AndroidStudioProject\\UDOOBLE\\baseBLESensorTAG\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\ball_acceleration.xml",
+        "source": "C:\\Users\\Luca\\AndroidStudioProject\\UDOOBLE\\baseBLESensorTAG\\build\\intermediates\\bundles\\debug\\res\\layout\\ball_acceleration.xml"
+    },
+    {
+        "merged": "C:\\Users\\Luca\\AndroidStudioProject\\UDOOBLE\\baseBLESensorTAG\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\fragment_scan.xml",
+        "source": "C:\\Users\\Luca\\AndroidStudioProject\\UDOOBLE\\baseBLESensorTAG\\build\\intermediates\\bundles\\debug\\res\\layout\\fragment_scan.xml"
+    },
+    {
+        "merged": "C:\\Users\\Luca\\AndroidStudioProject\\UDOOBLE\\baseBLESensorTAG\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\fragment_drumsimple.xml",
+        "source": "C:\\Users\\Luca\\AndroidStudioProject\\UDOOBLE\\baseBLESensorTAG\\build\\intermediates\\bundles\\debug\\res\\layout\\fragment_drumsimple.xml"
+    },
+    {
+        "merged": "C:\\Users\\Luca\\AndroidStudioProject\\UDOOBLE\\baseBLESensorTAG\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_main.xml",
+        "source": "C:\\Users\\Luca\\AndroidStudioProject\\UDOOBLE\\baseBLESensorTAG\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_main.xml"
+    }
+]

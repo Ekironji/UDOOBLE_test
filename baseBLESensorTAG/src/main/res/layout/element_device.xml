@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#d40e58"
+    android:id="@+id/backgroundLayout">
+
+    <com.aidilab.ble.sensor.gui.views.SquareImageView
+        android:id="@+id/imageViewFizzly"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/image"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="20dp"
+        android:focusable="false"
+        android:src="@drawable/fizzly_nero" 
+        android:scaleType="centerInside"/>
+
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_gravity="bottom"
+        android:background="#55000000">
+        
+       <TextView
+	        android:id="@+id/fizzlyName"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:focusable="false"
+	        android:gravity="center"
+	        android:textSize="20sp"
+   			android:textStyle="bold"
+	        android:textColor="@android:color/white"/>
+
+       <ImageView
+           android:id="@+id/imageViewRssi"
+           android:layout_width="30dp"
+           android:layout_height="30dp"
+           android:layout_alignParentRight="true"
+           android:layout_alignBottom="@+id/fizzlyName" 
+           android:scaleType="centerInside"
+           android:src="@drawable/rssi_4" />
+        
+    </RelativeLayout>
+    
+
+</FrameLayout >
