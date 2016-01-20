@@ -170,7 +170,7 @@ public abstract class DevicesBLEScanActivity extends FragmentActivity {
 	public void onScanViewReady() {
 		// Initial state of widgets
 		updateGuiState();
-		Log.i("BLEfromsensorTag", "mInitialized: " + mInitialised);
+		Log.i("BLEfromsensorTag", "mInitialize");
 		if (!mInitialised) {
 			// Broadcast receiver
 
@@ -313,7 +313,7 @@ public abstract class DevicesBLEScanActivity extends FragmentActivity {
 	      mDeviceInfoList.clear();
 	      mScanView.notifyDataSetChanged();
 	    }
-	  }
+	}
 
 	private void setBusy(boolean f) {
 	    mScanView.setBusy(f);

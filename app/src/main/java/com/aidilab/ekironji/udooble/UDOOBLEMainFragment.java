@@ -27,14 +27,105 @@ public class UDOOBLEMainFragment extends UDOOBLEFragment {
 
 	    /**   GUI initialization - getting gui references */
 
-        Button buttonLED = (Button) view.findViewById(R.id.button_led);
-        buttonLED.setOnClickListener(new View.OnClickListener() {
+        Button greenLEDBlink = (Button) view.findViewById(R.id.but_green_start_blink);
+        greenLEDBlink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i("MAIN fragment", "on click");
-                mActivity.turnLED(100, 1);
+                mActivity.turnLED(UDOOBLEActivity.GREEN_LED, UDOOBLEActivity.BLINK_ON, 100);
             }
         });
+        Button greenLEDSTOPBLink = (Button) view.findViewById(R.id.but_green_stop_blink);
+        greenLEDSTOPBLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("MAIN fragment", "on click");
+                mActivity.turnLED(UDOOBLEActivity.GREEN_LED, UDOOBLEActivity.LED_OFF, 100);
+            }
+        });
+        Button greenLEDTurnOn = (Button) view.findViewById(R.id.but_green_turnon);
+        greenLEDTurnOn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("MAIN fragment", "on click");
+                mActivity.turnLED(UDOOBLEActivity.GREEN_LED, UDOOBLEActivity.LED_ON, 100);
+            }
+        });
+        Button greenLEDTurnOff = (Button) view.findViewById(R.id.but_green_turnoff);
+        greenLEDTurnOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("MAIN fragment", "on click");
+                mActivity.turnLED(UDOOBLEActivity.GREEN_LED, UDOOBLEActivity.LED_OFF, 100);
+            }
+        });
+
+        Button yellowLEDBLink = (Button) view.findViewById(R.id.but_yellow_start_blink);
+        yellowLEDBLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("MAIN fragment", "on click");
+                mActivity.turnLED(UDOOBLEActivity.YELLOW_LED, UDOOBLEActivity.BLINK_ON, 100);
+            }
+        });
+        Button yellowLEDSTOPBLink = (Button) view.findViewById(R.id.but_yellow_led_stop_blink);
+        yellowLEDSTOPBLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("MAIN fragment", "on click");
+                mActivity.turnLED(UDOOBLEActivity.YELLOW_LED, UDOOBLEActivity.LED_OFF, 100);
+            }
+        });
+        Button yellowLEDTurnOn = (Button) view.findViewById(R.id.but_yellow_led_turnon);
+        yellowLEDTurnOn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("MAIN fragment", "on click");
+                mActivity.turnLED(UDOOBLEActivity.YELLOW_LED, UDOOBLEActivity.LED_ON, 100);
+            }
+        });
+        Button yellowLEDTurnOff = (Button) view.findViewById(R.id.but_yellow_led_turnoff);
+        yellowLEDTurnOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("MAIN fragment", "on click");
+                mActivity.turnLED(UDOOBLEActivity.YELLOW_LED, UDOOBLEActivity.LED_OFF, 100);
+            }
+        });
+
+        Button redLEDBLink = (Button) view.findViewById(R.id.but_red_led_start_blink);
+        redLEDBLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("MAIN fragment", "on click");
+                mActivity.turnLED(UDOOBLEActivity.RED_LED, UDOOBLEActivity.BLINK_ON, 100);
+            }
+        });
+        Button redLEDSTOPBLink = (Button) view.findViewById(R.id.but_red_led_stop_blink);
+        redLEDSTOPBLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("MAIN fragment", "on click");
+                mActivity.turnLED(UDOOBLEActivity.RED_LED, UDOOBLEActivity.LED_OFF, 100);
+            }
+        });
+        Button redLEDTurnOn = (Button) view.findViewById(R.id.but_red_led_turnon);
+        redLEDTurnOn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("MAIN fragment", "on click");
+                mActivity.turnLED(UDOOBLEActivity.RED_LED, UDOOBLEActivity.LED_ON, 100);
+            }
+        });
+        Button redLEDTurnOff = (Button) view.findViewById(R.id.but_red_led_turnoff);
+        redLEDTurnOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("MAIN fragment", "on click");
+                mActivity.turnLED(UDOOBLEActivity.RED_LED, UDOOBLEActivity.LED_OFF, 100);
+            }
+        });
+
 
         mActivity.onViewInflated(view);
 	    return view;

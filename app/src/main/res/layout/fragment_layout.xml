@@ -1,12 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-
-    <Button
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LED RED BLINK"
-        android:id="@+id/button_led" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GREEN LED"
+            android:id="@+id/textViewGREENLED"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="START BLINK"
+            android:id="@+id/but_green_start_blink"
+            android:layout_below="@+id/textViewGREENLED"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STOP BLINK"
+            android:id="@+id/but_green_stop_blink"
+            android:layout_alignTop="@+id/but_green_start_blink"
+            android:layout_toEndOf="@+id/but_green_start_blink" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TURN ON"
+            android:id="@+id/but_green_turnon"
+            android:layout_below="@+id/but_green_stop_blink"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TURN OFF"
+            android:id="@+id/but_green_turnoff"
+            android:layout_alignTop="@+id/but_green_turnon"
+            android:layout_toEndOf="@+id/but_green_turnon" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="YELLOW LED"
+            android:id="@+id/textViewYELLOWLED"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="START BLINK"
+            android:id="@+id/but_yellow_start_blink"
+            android:layout_below="@+id/textViewYELLOWLED"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STOP BLINK"
+            android:id="@+id/but_yellow_led_stop_blink"
+            android:layout_alignTop="@+id/but_yellow_start_blink"
+            android:layout_toEndOf="@+id/but_yellow_start_blink" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TURN ON"
+            android:id="@+id/but_yellow_led_turnon"
+            android:layout_below="@+id/but_yellow_led_stop_blink"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TURN OFF"
+            android:id="@+id/but_yellow_led_turnoff"
+            android:layout_alignTop="@+id/but_yellow_led_turnon"
+            android:layout_toEndOf="@+id/but_yellow_led_turnon" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RED LED"
+            android:id="@+id/textViewREDLED"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="START BLINK"
+            android:id="@+id/but_red_led_start_blink"
+            android:layout_below="@+id/textViewREDLED"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STOP BLINK"
+            android:id="@+id/but_red_led_stop_blink"
+            android:layout_alignTop="@+id/but_red_led_start_blink"
+            android:layout_toEndOf="@+id/but_red_led_start_blink" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TURN ON"
+            android:id="@+id/but_red_led_turnon"
+            android:layout_below="@+id/but_red_led_start_blink"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TURN OFF"
+            android:id="@+id/but_red_led_turnoff"
+            android:layout_alignTop="@+id/but_red_led_turnon"
+            android:layout_toEndOf="@+id/but_red_led_turnon" />
+
+    </RelativeLayout>
+
 </LinearLayout>

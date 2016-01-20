@@ -41,10 +41,15 @@ public abstract class UDOOBLEActivity extends FragmentActivity{
 	
 	private static String TAG = "UDOOBLEActivity";
 
-	final byte LED_ON		= 0x01;
-	final byte LED_OFF		= 0x00;
-	final byte BLINK_ON		= 0x02;
+	final public static byte LED_ON		= 0x01;
+	final public static byte LED_OFF		= 0x00;
+	final public static byte BLINK_ON		= 0x02;
 	final byte BLINK_OFF	= 0x00;
+
+	final public static int GREEN_LED	= 1;
+	final public static int YELLOW_LED = 2;
+	final public static int RED_LED	= 3;
+
 
 	// Activity
 	public static final String EXTRA_DEVICE = "EXTRA_DEVICE";
@@ -311,7 +316,7 @@ public abstract class UDOOBLEActivity extends FragmentActivity{
 
 	public void onCharacteristicChanged(String uuidStr, byte[] rawValue) {
 
-		Log.d(TAG,"onCharacteristicChanged: " + uuidStr);
+		Log.d(TAG, "onCharacteristicChanged: " + uuidStr);
 		Point3D           v = null;
 		SensorsValues    sv = null;
 	  	Integer buttonState = null;
@@ -358,14 +363,24 @@ public abstract class UDOOBLEActivity extends FragmentActivity{
 		Log.i(TAG, "onCharacteristicsRead: " + uuidStr);		
 	}
 
-	public void turnLED(int millis, int color){
+	public void turnLED(int color, byte func, int millis){
 		BluetoothGattService serv = null;
 		BluetoothGattCharacteristic charac = null;
 
 		serv   = mBtGatt.getService(UDOOBLE.UUID_LED_SERV);
-		charac = serv.getCharacteristic(UDOOBLE.UUID_LED_RED);
+		switch(color){
+			case GREEN_LED:
+				charac = serv.getCharacteristic(UDOOBLE.UUID_LED_GREEN);
+				break;
+			case YELLOW_LED:
+				charac = serv.getCharacteristic(UDOOBLE.UUID_LED_YELLOW);
+				break;
+			case RED_LED:
+				charac = serv.getCharacteristic(UDOOBLE.UUID_LED_RED);
+				break;
+		}
 		byte[] msg = new byte[2];
-		msg[0] = (byte)0x02;
+		msg[0] = func;
 		msg[1] = (byte)0x03;
 		mBtLeService.writeCharacteristic(charac, msg);
 		Log.i("DeviceActivity","Scrtitta la caratteristica dei led : " + msg.toString());
