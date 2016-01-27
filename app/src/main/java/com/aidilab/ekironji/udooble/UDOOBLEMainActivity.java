@@ -13,6 +13,7 @@ public class UDOOBLEMainActivity extends UDOOBLEActivity {
     private UDOOBLEMainFragment mFragmentView = null;
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -25,7 +26,8 @@ public class UDOOBLEMainActivity extends UDOOBLEActivity {
                     .add(R.id.container, mFragmentView).commit();
         }
 
-        enableSensors(UDOOBLESensor.ACCELEROMETER);
+        enableSensors(UDOOBLESensor.GYROSCOPE, UDOOBLESensor.TEMPERATURE);
+
     }
 
     @Override

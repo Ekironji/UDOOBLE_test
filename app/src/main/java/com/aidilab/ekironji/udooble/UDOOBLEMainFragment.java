@@ -1,15 +1,21 @@
 package com.aidilab.ekironji.udooble;
 
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import com.aidilab.ble.interfaces.UDOOBLEActivity;
 import com.aidilab.ble.interfaces.UDOOBLEFragment;
 import com.aidilab.ble.utils.SensorsValues;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Luca on 19/01/2016.
@@ -126,6 +132,33 @@ public class UDOOBLEMainFragment extends UDOOBLEFragment {
             }
         });
 
+        Button readTemp = (Button) view.findViewById(R.id.but_temp_read);
+        readTemp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mActivity.enableTemperature();
+                mActivity.readTemperature();
+            }
+        });
+
+        final Spinner spinner_temp = (Spinner) view.findViewById(R.id.spinner_temp_precision);
+        List<String> list = new ArrayList<String>();
+        list.add("9");
+        list.add("10");
+        list.add("11");
+        list.add("12");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_temp.setAdapter(dataAdapter);
+
+        Button temp_set_precision = (Button) view.findViewById(R.id.but_set_precision);
+        temp_set_precision.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mActivity.setTempPrecision(Integer.parseInt(spinner_temp.getSelectedItem().toString()));
+            }
+        });
 
         mActivity.onViewInflated(view);
 	    return view;

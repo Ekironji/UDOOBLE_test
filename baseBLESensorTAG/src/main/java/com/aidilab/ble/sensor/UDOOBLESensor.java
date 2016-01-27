@@ -42,6 +42,7 @@ import android.util.Log;
 import com.aidilab.ble.utils.Point3D;
 import com.aidilab.ble.utils.SensorsValues;
 
+import java.util.Arrays;
 import java.util.UUID;
 
 import static com.aidilab.ble.sensor.UDOOBLE.UUID_ACC_CONF;
@@ -55,6 +56,10 @@ import static com.aidilab.ble.sensor.UDOOBLE.UUID_KEY_SERV;
 import static com.aidilab.ble.sensor.UDOOBLE.UUID_MAG_CONF;
 import static com.aidilab.ble.sensor.UDOOBLE.UUID_MAG_DATA;
 import static com.aidilab.ble.sensor.UDOOBLE.UUID_MAG_SERV;
+import static com.aidilab.ble.sensor.UDOOBLE.UUID_TEM_CONF;
+import static com.aidilab.ble.sensor.UDOOBLE.UUID_TEM_DATA;
+import static com.aidilab.ble.sensor.UDOOBLE.UUID_TEM_SERV;
+
 
 
 /**
@@ -66,11 +71,11 @@ public enum UDOOBLESensor {
   ACCELEROMETER(UUID_ACC_SERV, UUID_ACC_DATA, UUID_ACC_CONF) {
   	@Override
   	public Point3D convert(final byte[] value) {
-  		float x = (float) ((short) ((value[0] << 8) | (value[1] & 0xff))) / 100;
-  		float y = (float) ((short) ((value[2] << 8) | (value[3] & 0xff))) / 100;
-  		float z = (float) ((short) ((value[4] << 8) | (value[5] & 0xff))) / 100;
+      float x = (float) ((short) ((value[0] << 8) | (value[1] & 0xff))) / 100;
+      float y = (float) ((short) ((value[2] << 8) | (value[3] & 0xff))) / 100;
+      float z = (float) ((short) ((value[4] << 8) | (value[5] & 0xff))) / 100;
 
-  		return new Point3D(x , y , z );
+      return new Point3D(x , y , z );
   	}
   },
 
@@ -101,10 +106,17 @@ public enum UDOOBLESensor {
 
   CAPACITIVE_BUTTON(UUID_KEY_SERV, UUID_KEY_DATA, null) {
     @Override
-    public Integer convertKeys(final byte [] value) {
+    public Integer convertKeys(final byte[] value) {
       Integer encodedInteger = (int) value[0];
 
       return encodedInteger;
+    }
+  },
+
+  TEMPERATURE(UUID_TEM_SERV, UUID_TEM_DATA, UUID_TEM_CONF){
+    @Override
+    public String convertTemp(final byte[] value) {
+      return Arrays.toString(value);
     }
   };
 
@@ -138,8 +150,12 @@ public enum UDOOBLESensor {
     throw new UnsupportedOperationException("Programmer error, the individual enum classes are supposed to override this method.");
   }
 
+  public String convertTemp(byte[] value) {
+    throw new UnsupportedOperationException("Programmer error, the individual enum classes are supposed to override this method.");
+  }
+
   public SensorsValues unpack(byte[] value) {
-	    throw new UnsupportedOperationException("Programmer error, the individual enum classes are supposed to override this method.");
+    throw new UnsupportedOperationException("Programmer error, the individual enum classes are supposed to override this method.");
   }
 
 	private final UUID service, data, config;
@@ -186,5 +202,5 @@ public enum UDOOBLESensor {
     throw new RuntimeException("Programmer error, unable to find uuid.");
   }
   
-  public static final UDOOBLESensor[] SENSOR_LIST = { ACCELEROMETER, MAGNETOMETER, GYROSCOPE, CAPACITIVE_BUTTON};
+  public static final UDOOBLESensor[] SENSOR_LIST = { ACCELEROMETER, MAGNETOMETER, GYROSCOPE, CAPACITIVE_BUTTON, TEMPERATURE};
 }

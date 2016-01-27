@@ -46,13 +46,13 @@ public class UDOOBLE {
             UUID_ACC_PERI = fromString("d77215f4-79c6-452f-994c-9829da1a4229"), // Period in tens of milliseconds
 
             /* Magnetometer */
-            UUID_MAG_SERV = fromString("d772ddc8-79c6-452f-994c-9829da1a4229"),
+            UUID_MAG_SERV = fromString("d772dd58-79c6-452f-994c-9829da1a4229"),
             UUID_MAG_DATA = fromString("d7721cb3-79c6-452f-994c-9829da1a4229"),
             UUID_MAG_CONF = fromString("d772c043-79c6-452f-994c-9829da1a4229"), // 0: disable, 1: enable
             UUID_MAG_PERI = fromString("d77215f4-79c6-452f-994c-9829da1a4229"), // Period in tens of milliseconds
 
             /* Gyroscope */
-            UUID_GYR_SERV = fromString("d772ca60-79c6-452f-994c-9829da1a4229"),
+            UUID_GYR_SERV = fromString("d7725a60-79c6-452f-994c-9829da1a4229"),
             UUID_GYR_DATA = fromString("d772ff58-79c6-452f-994c-9829da1a4229"),
             UUID_GYR_CONF = fromString("d772c043-79c6-452f-994c-9829da1a4229"), // 0: disable, 1: enable
             UUID_GYR_PERI = fromString("d77215f4-79c6-452f-994c-9829da1a4229"), // Period in tens of milliseconds

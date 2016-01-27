@@ -28,6 +28,7 @@ import com.aidilab.ble.utils.Point3D;
 import com.aidilab.ble.utils.SensorsValues;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -75,7 +76,7 @@ public abstract class UDOOBLEActivity extends FragmentActivity{
 	protected GestureDetector mGestureDetector = null;
 	
 	// Sensors parameter
-	private int NOTIFICATIONS_PERIOD = 5;
+	private int NOTIFICATIONS_PERIOD = 10;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -227,7 +228,6 @@ public abstract class UDOOBLEActivity extends FragmentActivity{
 				mBtLeService.waitIdle(GATT_TIMEOUT);
 			}*/
 	  		
-	  		
 			// FIZZLY: se e' accelerometro ne setto il periodo dopo averlo attivato
 			if (confUuid.equals(UDOOBLE.UUID_ACC_CONF) && enable) {
 				charac = serv.getCharacteristic(UDOOBLE.UUID_ACC_PERI);
@@ -254,6 +254,15 @@ public abstract class UDOOBLEActivity extends FragmentActivity{
 		  		Log.i("DeviceActivity","Scrtitta la caratteristica del periodo dell GIROSCOPIO : " + value);
 				mBtLeService.waitIdle(GATT_TIMEOUT);
 			}
+
+			// FIZZLY: se e' GIRO ne setto il periodo dopo averlo attivato
+			if (confUuid.equals(UDOOBLE.UUID_TEM_CONF) && enable) {
+				charac = serv.getCharacteristic(UDOOBLE.UUID_TEM_PERI);
+				value = (byte) NOTIFICATIONS_PERIOD;
+				mBtLeService.writeCharacteristic(charac, value);
+				Log.i("DeviceActivity","Scrtitta la caratteristica del periodo dell GIROSCOPIO : " + value);
+				mBtLeService.waitIdle(GATT_TIMEOUT);
+			}
 			
 	  	}
 	}
@@ -264,7 +273,7 @@ public abstract class UDOOBLEActivity extends FragmentActivity{
 	  		UUID dataUuid = sensor.getData();
 	  		BluetoothGattService serv = mBtGatt.getService(servUuid);
 	  		
-	  		Log.i(TAG, "service "+ servUuid.toString() + " is null: " + (serv == null) );
+	  		Log.i(TAG, "enableNotifications service "+ servUuid.toString() + " is null: " + (serv == null) );
 	  		
 	  		BluetoothGattCharacteristic charac = serv.getCharacteristic(dataUuid);
 	  		
@@ -298,7 +307,7 @@ public abstract class UDOOBLEActivity extends FragmentActivity{
 	  		} else if (BleService.ACTION_DATA_READ.equals(action)) {
 	  			// Data read
 	  			String uuidStr = intent.getStringExtra(BleService.EXTRA_UUID);
-	  			byte  [] value = intent.getByteArrayExtra(BleService.EXTRA_DATA);
+	  			byte [] value = intent.getByteArrayExtra(BleService.EXTRA_DATA);
 	  			onCharacteristicsRead(uuidStr,value,status);
 	  		}
 	
@@ -312,8 +321,7 @@ public abstract class UDOOBLEActivity extends FragmentActivity{
 	  Log.d(TAG,"onCharacteristicWrite: " + uuidStr);
 	}
 
-	// Arrivano i dati dal sensore
-
+	// Arrivano i dati dal sensore le notifiche
 	public void onCharacteristicChanged(String uuidStr, byte[] rawValue) {
 
 		Log.d(TAG, "onCharacteristicChanged: " + uuidStr);
@@ -332,15 +340,17 @@ public abstract class UDOOBLEActivity extends FragmentActivity{
 				
 	  	if (uuidStr.equals(UUID_ACC_DATA.toString())) {
 	  		v = UDOOBLESensor.ACCELEROMETER.convert(rawValue);
-			//Log.i(TAG, "x: "+ v.x + " - y: "+ v.y + " - z: "+v.z);
+			Log.i(TAG, "ACCELEROMETER - x: "+ v.x + " - y: "+ v.y + " - z: "+v.z);
 	  	} 
 	  
 	  	if (uuidStr.equals(UUID_MAG_DATA.toString())) {
 	  		v = UDOOBLESensor.MAGNETOMETER.convert(rawValue);
+			Log.i(TAG, "MAGNETOMETER - x: "+ v.x + " - y: "+ v.y + " - z: "+v.z);
 	  	} 
 	
 	  	if (uuidStr.equals(UUID_GYR_DATA.toString())) {
 	  		v = UDOOBLESensor.GYROSCOPE.convert(rawValue);
+			Log.i(TAG, "GYROSCOPE - x: "+ v.x + " - y: "+ v.y + " - z: "+v.z);
 	  	} 
 
 	  	if (uuidStr.equals(UUID_KEY_DATA.toString())) {
@@ -360,7 +370,7 @@ public abstract class UDOOBLEActivity extends FragmentActivity{
 	}
 
 	private void onCharacteristicsRead(String uuidStr, byte [] value, int status) {
-		Log.i(TAG, "onCharacteristicsRead: " + uuidStr);		
+		Log.i(TAG, "onCharacteristicsRead: " + uuidStr + " - value: " + Arrays.toString(value) + " - status: " + status);
 	}
 
 	public void turnLED(int color, byte func, int millis){
@@ -385,6 +395,46 @@ public abstract class UDOOBLEActivity extends FragmentActivity{
 		mBtLeService.writeCharacteristic(charac, msg);
 		Log.i("DeviceActivity","Scrtitta la caratteristica dei led : " + msg.toString());
 		mBtLeService.waitIdle(GATT_TIMEOUT);
+	}
+
+	public void enableTemperature() {
+		BluetoothGattService serv = null;
+		BluetoothGattCharacteristic charac = null;
+
+		serv   = mBtGatt.getService(UDOOBLE.UUID_TEM_SERV);
+		charac = serv.getCharacteristic(UDOOBLE.UUID_TEM_CONF);
+
+		mBtLeService.writeCharacteristic(charac, (byte)1);
+		mBtLeService.waitIdle(GATT_TIMEOUT);
+		Log.i(TAG, "enable temp");
+	}
+
+	public void readTemperature() {
+		BluetoothGattService serv = null;
+		BluetoothGattCharacteristic charac = null;
+
+		serv   = mBtGatt.getService(UDOOBLE.UUID_TEM_SERV);
+		charac = serv.getCharacteristic(UDOOBLE.UUID_TEM_DATA);
+
+		mBtLeService.readCharacteristic(charac);
+		Log.i(TAG, "read temp");
+	}
+
+	public void setTempPrecision(int resolution) {
+		Log.i(TAG, "Temp resolution: " + resolution);
+		if(resolution < 9  || resolution > 12) {
+			setError("TEMPERATURE: resolution error");
+		} else {
+			BluetoothGattService serv = null;
+			BluetoothGattCharacteristic charac = null;
+
+			byte msg = (byte) resolution;
+
+			serv   = mBtGatt.getService(UDOOBLE.UUID_TEM_SERV);
+			charac = serv.getCharacteristic(UDOOBLE.UUID_TEM_RESO);
+			mBtLeService.writeCharacteristic(charac, msg);
+			mBtLeService.waitIdle(GATT_TIMEOUT);
+		}
 	}
 
 	public void setSensorPeriod(int millis){
