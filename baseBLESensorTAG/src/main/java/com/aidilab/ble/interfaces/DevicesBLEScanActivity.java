@@ -3,7 +3,9 @@ package com.aidilab.ble.interfaces;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
@@ -11,11 +13,13 @@ import android.bluetooth.BluetoothManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.FragmentActivity;
@@ -37,6 +41,9 @@ public abstract class DevicesBLEScanActivity extends FragmentActivity {
 	  
 	private static final int NO_DEVICE = -1;
 	private boolean mInitialised       = false;
+
+	// permission
+	private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
 	
 	//BLE management
 	private boolean mBleSupported                     = true;
@@ -110,6 +117,51 @@ public abstract class DevicesBLEScanActivity extends FragmentActivity {
 	    mFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
 	    mFilter.addAction(BleService.ACTION_GATT_CONNECTED);
 	    mFilter.addAction(BleService.ACTION_GATT_DISCONNECTED);
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			// Android M Permission check
+			if (this.checkCallingOrSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+				final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setTitle("This app needs location access");
+				builder.setMessage("Please grant location access so this app can detect beacons.");
+				builder.setPositiveButton(android.R.string.ok, null);
+				builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+							requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_REQUEST_COARSE_LOCATION);
+						}
+					}
+				});
+				builder.show();
+			}
+		}
+	}
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode,
+										   String permissions[], int[] grantResults) {
+		switch (requestCode) {
+			case PERMISSION_REQUEST_COARSE_LOCATION: {
+				if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					Log.d(TAG, "coarse location permission granted");
+				} else {
+					final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+					builder.setTitle("Functionality limited");
+					builder.setMessage("Since location access has not been granted, this app will not be able to discover beacons when in the background.");
+					builder.setPositiveButton(android.R.string.ok, null);
+					builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+
+						@Override
+						public void onDismiss(DialogInterface dialog) {
+						}
+
+					});
+					builder.show();
+				}
+				return;
+			}
+		}
 	}
 	
 	@Override

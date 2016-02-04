@@ -59,7 +59,7 @@ public class HSVColorPickerDialog extends AlertDialog {
 			}
 		} );
 		colorWheel.setColor( initialColor );
-		colorWheel.setId( 1 );
+//		colorWheel.setId( 1 );
 		layout.addView( colorWheel, lp );
 		
 		int selectedColorHeight = (int) (context.getResources().getDisplayMetrics().density * SELECTED_COLOR_HEIGHT_DP);
@@ -67,7 +67,7 @@ public class HSVColorPickerDialog extends AlertDialog {
 		FrameLayout valueSliderBorder = new FrameLayout( context );
 		valueSliderBorder.setBackgroundColor( BORDER_COLOR );
 		valueSliderBorder.setPadding( borderSize, borderSize, borderSize, borderSize );
-		valueSliderBorder.setId( 2 );
+//		valueSliderBorder.setId( 2 );
 		lp = new RelativeLayout.LayoutParams( LayoutParams.MATCH_PARENT, selectedColorHeight + 2 * borderSize );
 		lp.bottomMargin = (int) (context.getResources().getDisplayMetrics().density * CONTROL_SPACING_DP);
 		lp.addRule( RelativeLayout.BELOW, 1 );
@@ -189,8 +189,8 @@ public class HSVColorPickerDialog extends AlertDialog {
 				canvas.drawBitmap(bitmap, null, rect, null);
 				float hueInPiInterval = colorHsv[0] / 180f * (float)Math.PI;
 				
-				selectedPoint.x = rect.left + (int) (-FloatMath.cos( hueInPiInterval ) * colorHsv[1] * innerCircleRadius + fullCircleRadius);
-				selectedPoint.y = rect.top + (int) (-FloatMath.sin( hueInPiInterval ) * colorHsv[1] * innerCircleRadius + fullCircleRadius);
+				selectedPoint.x = rect.left + (int) (-Math.cos( hueInPiInterval ) * colorHsv[1] * innerCircleRadius + fullCircleRadius);
+				selectedPoint.y = rect.top + (int) (-Math.sin( hueInPiInterval ) * colorHsv[1] * innerCircleRadius + fullCircleRadius);
 				
 				canvas.drawLine( selectedPoint.x - pointerLength, selectedPoint.y, selectedPoint.x + pointerLength, selectedPoint.y, pointerPaint );
 				canvas.drawLine( selectedPoint.x, selectedPoint.y - pointerLength, selectedPoint.x, selectedPoint.y + pointerLength, pointerPaint );
